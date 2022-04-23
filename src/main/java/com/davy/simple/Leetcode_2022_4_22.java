@@ -18,32 +18,31 @@ import java.util.Map;
 public class Leetcode_2022_4_22 {
 
     public boolean isValid(String s) {
-        int n = s.length();
-        if (n % 2 == 1) {
+        int count = s.length();
+        if (count % 2 != 0) {
             return false;
         }
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put(']', '[');
+        map.put('}', '{');
 
-        Map<Character, Character> pairs = new HashMap<Character, Character>() {{
-            put(')', '(');
-            put(']', '[');
-            put('}', '{');
-        }};
-        Deque<Character> stack = new LinkedList<>();
-        for (int i = 0; i < n; i++) {
-            char ch = s.charAt(i);
-            if (pairs.containsKey(ch)) {
-                if (stack.isEmpty() || stack.peek() != pairs.get(ch)) {
+        Deque<Character> deque = new LinkedList<>();
+        for (int i = 0; i < count;i++){
+            if(map.containsKey(s.charAt(i))){
+                if(map.get(s.charAt(i))==deque.peek()){
+                    deque.pop();
+                }else {
                     return false;
                 }
-                stack.pop();
-            } else {
-                stack.push(ch);
+            }else{
+                deque.push(s.charAt(i));
             }
         }
-        return stack.isEmpty();
+        return deque.isEmpty();
     }
 
     public static void main(String[] args) {
-        System.out.println(new Leetcode_2022_4_22().isValid("{[()]}"));
+        System.out.println(new Leetcode_2022_4_22().isValid("[]()"));
     }
 }
