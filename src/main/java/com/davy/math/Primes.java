@@ -8,26 +8,6 @@ package com.davy.math;
 public class Primes {
 
     public int countPrimes(int n) {
-        int count = 0;
-        if (n <= 2) {
-            return 0;
-        } else {
-            boolean tip = true;
-            for (int i = 2; i < n; i++) {
-                int j = 2;
-                if (tip) {
-                    ++count;
-                }
-                tip = true;
-                while (j < i) {
-                    if (i % j == 0) {
-                        tip = false;
-                        break;
-                    }
-                    ++j;
-                }
-            }
-        }
-        return count;
+        return 0;
     }
 }
